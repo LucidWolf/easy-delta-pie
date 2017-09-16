@@ -16,7 +16,7 @@
  */
 package easydeltapie.connect.controller;
 
-import easydeltapie.DeltaAutoLevel;
+import easydeltapie.EasyDeltaPie;
 import easydeltapie.connect.DeltaComPort;
 import easydeltapie.connect.machine.MachineState;
 import easydeltapie.connect.machine.states.EepromState;
@@ -28,9 +28,9 @@ import java.util.HashSet;
  * @author LucidWolf <https://github.com/LucidWolf>
  */
 public class ConnectWindowListener extends DeltaComControl{
-    private final DeltaAutoLevel dal;
+    private final EasyDeltaPie dal;
     private final HashSet<Integer> toFilter = new HashSet<>();
-    public ConnectWindowListener(DeltaComPort com, DeltaAutoLevel dal){
+    public ConnectWindowListener(DeltaComPort com, EasyDeltaPie dal){
         super(com);
         this.dal = dal;
         toFilter.add(MachineState.DATA_IDLE);

@@ -18,7 +18,7 @@ package easydeltapie.connect;
 
 import easydeltapie.connect.controller.ConnectWindowListener;
 import easydeltapie.connect.controller.DeltaComControl;
-import easydeltapie.DeltaAutoLevel;
+import easydeltapie.EasyDeltaPie;
 import easydeltapie.connect.machine.Firmware;
 import easydeltapie.connect.machine.MachineState;
 import easydeltapie.connect.machine.Marlin;
@@ -42,7 +42,7 @@ public class DeltaComPort implements Runnable, SerialPortEventListener{
     // Milliseconds to block while waiting for port open 
     private static final int TIME_OUT = 2000;
     private final CommPortIdentifier port;
-    private final DeltaAutoLevel dal;
+    private final EasyDeltaPie dal;
     private boolean running;
     private SerialPort serialPort;
     private PrintStream output;
@@ -52,7 +52,7 @@ public class DeltaComPort implements Runnable, SerialPortEventListener{
     
     private Firmware firmware;
     
-    public DeltaComPort(DeltaAutoLevel dal, CommPortIdentifier port) {
+    public DeltaComPort(EasyDeltaPie dal, CommPortIdentifier port) {
         this.dal = dal;
         this.port = port;
     }

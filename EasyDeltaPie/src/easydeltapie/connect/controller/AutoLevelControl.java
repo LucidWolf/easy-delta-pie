@@ -17,7 +17,7 @@
 
 package easydeltapie.connect.controller;
 
-import easydeltapie.DeltaAutoLevel;
+import easydeltapie.EasyDeltaPie;
 import easydeltapie.connect.DeltaComPort;
 import easydeltapie.connect.machine.Firmware;
 import easydeltapie.connect.machine.MachineState;
@@ -37,7 +37,7 @@ import javax.swing.JOptionPane;
  * @author LucidWolf <https://github.com/LucidWolf>
  */
 public class AutoLevelControl extends DeltaComControl{
-    private final DeltaAutoLevel dal;
+    private final EasyDeltaPie dal;
     private final ArrayList<BedProbePoint> points = new ArrayList<BedProbePoint>();
     private final int perRadius;
     private final int retry;
@@ -48,7 +48,7 @@ public class AutoLevelControl extends DeltaComControl{
     private final float initalZ = 10.0f;
     private final double maxCoefVariation;
     private final EepromState es;
-    public AutoLevelControl(DeltaComPort com, DeltaAutoLevel dal, int perRadius, int retry, double maxCoefVariation){
+    public AutoLevelControl(DeltaComPort com, EasyDeltaPie dal, int perRadius, int retry, double maxCoefVariation){
         super(com);
         this.dal = dal;
         this.es = com.getFirmwareParser().getEepromState();

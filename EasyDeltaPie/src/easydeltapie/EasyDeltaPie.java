@@ -41,7 +41,7 @@ import javax.swing.JOptionPane;
  *
  * @author LucidWolf <https://github.com/LucidWolf>
  */
-public final class DeltaAutoLevel extends javax.swing.JFrame {
+public final class EasyDeltaPie extends javax.swing.JFrame {
     private final HashSet<Component> viewConnectRequired = new HashSet<>();
     private final HashSet<Component> viewIgnore = new HashSet<>();
     private final HashSet<Component> commandButtons = new HashSet<>();
@@ -53,7 +53,7 @@ public final class DeltaAutoLevel extends javax.swing.JFrame {
     /**
      * Creates new form DeltaAutoLevel
      */
-    public DeltaAutoLevel() {
+    public EasyDeltaPie() {
         initComponents();
         buildConnectRequired();
         updatedConnectedViews(false);
@@ -282,7 +282,6 @@ public final class DeltaAutoLevel extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         mainPanel.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -1941,8 +1940,9 @@ public final class DeltaAutoLevel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeltaAutoLevel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EasyDeltaPie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         //</editor-fold>
@@ -1951,7 +1951,7 @@ public final class DeltaAutoLevel extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new DeltaAutoLevel().setVisible(true);
+                new EasyDeltaPie().setVisible(true);
             }
         });
     }

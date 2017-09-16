@@ -16,7 +16,7 @@
  */
 package easydeltapie.connect.controller;
 
-import easydeltapie.DeltaAutoLevel;
+import easydeltapie.EasyDeltaPie;
 import easydeltapie.connect.DeltaComPort;
 import easydeltapie.connect.machine.MachineState;
 import easydeltapie.connect.machine.states.EndStopState;
@@ -26,9 +26,9 @@ import easydeltapie.connect.machine.states.EndStopState;
  * @author LucidWolf <https://github.com/LucidWolf>
  */
 public class LimitCheckController extends DeltaComControl{
-    private final DeltaAutoLevel dal;
+    private final EasyDeltaPie dal;
     private boolean keepSpamming = true;
-    public LimitCheckController(DeltaComPort com, DeltaAutoLevel dal){
+    public LimitCheckController(DeltaComPort com, EasyDeltaPie dal){
         super(com);
         this.dal = dal;
     }

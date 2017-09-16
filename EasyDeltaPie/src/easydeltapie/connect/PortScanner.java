@@ -16,7 +16,7 @@
  */
 package easydeltapie.connect;
 
-import easydeltapie.DeltaAutoLevel;
+import easydeltapie.EasyDeltaPie;
 import gnu.io.CommPortIdentifier;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -32,10 +32,10 @@ import javax.swing.JComboBox;
 
 public class PortScanner implements Runnable{
 
-    private final DeltaAutoLevel delta;
+    private final EasyDeltaPie delta;
     private final JComboBox combo_coms;
     
-    public PortScanner(DeltaAutoLevel delta){
+    public PortScanner(EasyDeltaPie delta){
         this.delta = delta;
         this.combo_coms = delta.getCombo_coms();
     }
