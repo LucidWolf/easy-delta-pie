@@ -1,0 +1,37 @@
+Steps/mm (for Repetier only):		
+100.0000
+Initial endstop corrections:	
+X:0.0
+Y:0.0
+Z:0.0
+Initial diagonal rod length:		
+211.653
+Initial delta radius:		
+93.720
+Initial homed height:		
+285.620
+Initial tower angular position corrections:	
+X:0.0
+Y:0.0
+Z:0.0
+Printable bed radius:		
+95
+Number of probe points:		
+7
+Number of factors to calibrate:		
+4
+
+Suggest probe points
+Point 0	X:0.00Y:95.00Nozzle height error:0.10
+Point 1	X:82.27Y:47.50Nozzle height error:0.25
+Point 2	X:82.27Y:-47.50Nozzle height error:0.2
+Point 3	X:0.00Y:-95.00Nozzle height error:0.03
+Point 4	X:-82.27Y:-47.50Nozzle height error:0.05
+Point 5	X:-82.27Y:47.50Nozzle height error:0.02
+Point 6	X:0Y:0Nozzle height error:0.1
+Calculate
+Success! Calibrated 4 factors using 7 points, deviation before 0.13 after 0.04 
+New endstop corrections:	X:0Y:21Z:14
+New diagonal rod length:211.65New delta radius:93.70New homed height:285.61
+New tower position angle corrections:	X:0.00Y:0.00Z:0.00
+
