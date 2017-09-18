@@ -203,6 +203,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         button_Tpos = new javax.swing.JButton();
         button_Tneg = new javax.swing.JButton();
         button_homeAll = new javax.swing.JButton();
+        button_setCurZto1ExtraMM = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         text_gantryDesc = new javax.swing.JTextPane();
         levelPanel = new javax.swing.JPanel();
@@ -683,6 +684,13 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
             }
         });
 
+        button_setCurZto1ExtraMM.setText("I Need More Z Height to Level");
+        button_setCurZto1ExtraMM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_setCurZto1ExtraMMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout motionPanelLayout = new javax.swing.GroupLayout(motionPanel);
         motionPanel.setLayout(motionPanelLayout);
         motionPanelLayout.setHorizontalGroup(
@@ -722,39 +730,48 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(text_Nudge_Distance)))))
-                .addGap(25, 25, 25)
-                .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(motionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, motionPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(103, 103, 103))
+                            .addGroup(motionPanelLayout.createSequentialGroup()
+                                .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(motionPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(text_posZ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(motionPanelLayout.createSequentialGroup()
+                                        .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(motionPanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(text_posX, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(motionPanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(text_posY, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(button_GoToCart, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(46, 46, 46)
+                                        .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(motionPanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(text_posR, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(motionPanelLayout.createSequentialGroup()
+                                                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(text_posT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(button_GoToRad, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(11, 11, 11))))
+                    .addGroup(motionPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(text_posZ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(motionPanelLayout.createSequentialGroup()
                         .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(motionPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(text_posX, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(motionPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(text_posY, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(button_GoToCart, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(motionPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(text_posR, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(motionPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(text_posT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(button_GoToRad, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, motionPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))
-                    .addComponent(button_setCurZtoZero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11))
+                            .addComponent(button_setCurZto1ExtraMM, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_setCurZtoZero, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         motionPanelLayout.setVerticalGroup(
             motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,7 +805,9 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
                                         .addGroup(motionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(text_Nudge_Distance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(button_setCurZtoZero)))))
+                                            .addComponent(button_setCurZtoZero))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(button_setCurZto1ExtraMM))))
                             .addGroup(motionPanelLayout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(button_GoToRad))))
@@ -813,7 +832,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
                             .addComponent(text_posZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button_GoToCart)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         text_gantryDesc.setEditable(false);
@@ -1923,6 +1942,35 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_cal_updateRods1ActionPerformed
 
+    private void button_setCurZto1ExtraMMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_setCurZto1ExtraMMActionPerformed
+        // TODO add your handling code here:
+         float val = Float.NaN;
+        EepromValue height = this.getSelectedComPort().getFirmwareParser().getEepromState().getHomedHeight();
+        try{
+            val = Float.parseFloat(this.text_posZ.getText().trim());
+        }catch(Exception e){}
+        ArrayList<String> commands = new ArrayList<String>();
+        commands.add("M114");
+        if(!Float.isNaN(val)){
+            if(val == 0.0){
+                val = height.getValueAsFloat()+1.0f;
+                commands.add(getEepromState().getEepromWriteCommand(height, ""+(float)val));
+                commands.add(getEepromState().getEepromCommand());
+                commands.add("G28");
+                commands.add("G0 Z1.0");
+                commands.add("M114");
+            }else{
+                JOptionPane.showMessageDialog(this, "You can only run this command when you are at zero.\n"
+                        + "I only give you 1mm at a time.\n"
+                        + "I don't want you crashing your bed and blaming me. :)\n"
+                        + "If you have to do this alot it means you probe height is way off.");
+            }
+        }
+        SingleCommandControl sci = new SingleCommandControl(this.getSelectedComPort(), commands);
+        new Thread(sci).start();
+       
+    }//GEN-LAST:event_button_setCurZto1ExtraMMActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1982,6 +2030,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
     private javax.swing.JButton button_homeAll;
     private javax.swing.JToggleButton button_limitCheck;
     private javax.swing.JButton button_rescanComs;
+    private javax.swing.JButton button_setCurZto1ExtraMM;
     private javax.swing.JButton button_setCurZtoZero;
     private javax.swing.JButton button_updateHeight;
     private javax.swing.JButton button_updatePrintRadius;
