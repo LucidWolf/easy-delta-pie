@@ -260,8 +260,8 @@ public class DeltaParameters {
         out.add(es.getEepromWriteCommand(es.getHomedHeight(), ""+(float)this.homedHeight));
         float val[] = new float[3];
         val[0] = (float)this.aStopAdjust;
-        val[0] = (float)this.bStopAdjust;
-        val[0] = (float)this.cStopAdjust;
+        val[1] = (float)this.bStopAdjust;
+        val[2] = (float)this.cStopAdjust;
         out.addAll(es.getTowerStopAdjustEepromCommands(val));
         return out;
     }
