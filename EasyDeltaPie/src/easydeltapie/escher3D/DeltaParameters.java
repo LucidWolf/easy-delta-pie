@@ -263,6 +263,7 @@ public class DeltaParameters {
         val[1] = (float)this.bStopAdjust;
         val[2] = (float)this.cStopAdjust;
         out.addAll(es.getTowerStopAdjustEepromCommands(val));
+        out.add(es.getEepromCommand());
         return out;
     }
 }
