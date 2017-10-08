@@ -168,10 +168,10 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
             float a = lengths[0] - avg;
             float b = lengths[1] - avg;
             float c = lengths[2] - avg;
-            this.getEepromWriteCommand(this.diagonalRodLength, ""+avg);
-            this.getEepromWriteCommand(this.diagonalRodLength, ""+a);
-            this.getEepromWriteCommand(this.diagonalRodLength, ""+b);
-            this.getEepromWriteCommand(this.diagonalRodLength, ""+c);
+            out.add(this.getEepromWriteCommand(this.diagonalRodLength, ""+avg));
+            out.add(this.getEepromWriteCommand(this.diagonalRodAdjustA, ""+a));
+            out.add(this.getEepromWriteCommand(this.diagonalRodAdjustB, ""+b));
+            out.add(this.getEepromWriteCommand(this.diagonalRodAdjustC, ""+c));
         }else{
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }

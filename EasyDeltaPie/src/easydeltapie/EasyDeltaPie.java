@@ -260,7 +260,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         text_cal_angleB = new javax.swing.JTextField();
-        button_cal_updateRods1 = new javax.swing.JButton();
+        button_cal_updateTowerAngle = new javax.swing.JButton();
         text_cal_angleC = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
@@ -942,7 +942,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 64));
 
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Make sure: \n1.) The height is set close. (See Gantry Tab)\n2.) The probe sensor is working. (See Gantry Tab)\nElse the head will crash into the build plate.");
+        jTextPane1.setText("Make sure: \n1.) The height is set close. (See Gantry Tab)\n2.) The probe sensor is working. (See Gantry Tab)\n3.) The head is clean if head is part of probe (No dripping plastic)\nElse the head will crash into the build plate.");
         jTextPane1.setPreferredSize(new java.awt.Dimension(52, 52));
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -1192,10 +1192,10 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel45.setText("Tower C Angle");
 
-        button_cal_updateRods1.setText("Update Machine");
-        button_cal_updateRods1.addActionListener(new java.awt.event.ActionListener() {
+        button_cal_updateTowerAngle.setText("Update Machine");
+        button_cal_updateTowerAngle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_cal_updateRods1ActionPerformed(evt);
+                button_cal_updateTowerAngleActionPerformed(evt);
             }
         });
 
@@ -1243,7 +1243,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(button_cal_updateRods1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(button_cal_updateTowerAngle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1267,7 +1267,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
                     .addComponent(text_cal_angleC)
                     .addComponent(jLabel54))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(button_cal_updateRods1)
+                .addComponent(button_cal_updateTowerAngle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel57)
                 .addGap(20, 20, 20))
@@ -1303,6 +1303,11 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         text_cal_calcC.setText("aRod");
 
         button_cal_updateRods.setText("Update Machine");
+        button_cal_updateRods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_cal_updateRodsActionPerformed(evt);
+            }
+        });
 
         jLabel56.setText("Will require re-level");
 
@@ -1909,16 +1914,38 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
     }//GEN-LAST:event_button_cal_updateStepsActionPerformed
 
     private void button_cal_RodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cal_RodsActionPerformed
-        // TODO add your handling code here:
-        double A4 = 0.0;
-        double B4 = 0.0;
-        double C4 = 0.0;
-        JOptionPane.showMessageDialog(this, "Not working because i have to replace ^ with Math.pow(base, pow) so i need to write a parser.\nJust use Purple's spreadsheet you should only have to do it once.");
-        //double adjustA = =(-(32*(B4^2 - A4^2)^(5/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 6*A4*(C4/2)^5 - 32*A4^5*(C4/2) + 32*A4^5*(D4/2) - 32*B4^6 - 32*B4^2*A4^4 + 64*B4^4*A4^2 + (C4/2)^6 - 18*B4^2*(C4/2)^4 + 48*B4^4*(C4/2)^2 - 2*B4^2*(D4/2)^4 - 16*B4^4*(D4/2)^2 + 26*A4^2*(C4/2)^4 - 64*A4^3*(C4/2)^3 + 72*A4^4*(C4/2)^2 + 2*A4^2*(D4/2)^4 - 8*A4^3*(D4/2)^3 - 8*A4^4*(D4/2)^2 + (C4/2)^2*(D4/2)^4 - 2*(C4/2)^4*(D4/2)^2 - 136*B4^2*A4^2*(C4/2)^2 + 24*B4^2*A4^2*(D4/2)^2 + 16*B4^2*(C4/2)^2*(D4/2)^2 - 20*A4^2*(C4/2)^2*(D4/2)^2 - 96*B4^4*A4*(C4/2) + 32*B4^4*A4*(D4/2) - 2*A4*(C4/2)*(D4/2)^4 + 4*A4*(C4/2)^4*(D4/2) - 64*A4^4*(C4/2)*(D4/2) + 32*A4^2*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 32*(C4/2)^2*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 6*(C4/2)^4*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 16*(D4/2)^2*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 2*(D4/2)^4*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 72*B4^2*A4*(C4/2)^3 + 128*B4^2*A4^3*(C4/2) + 8*B4^2*A4*(D4/2)^3 - 64*B4^2*A4^3*(D4/2) - 4*A4*(C4/2)^2*(D4/2)^3 + 8*A4*(C4/2)^3*(D4/2)^2 + 8*A4^2*(C4/2)*(D4/2)^3 - 16*A4^2*(C4/2)^3*(D4/2) + 24*A4^3*(C4/2)*(D4/2)^2 + 48*A4^3*(C4/2)^2*(D4/2) - 24*A4*(C4/2)^3*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 32*A4^3*(C4/2)*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 8*A4*(D4/2)^3*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 32*B4^2*A4*(C4/2)*(D4/2)^2 - 32*B4^2*A4*(C4/2)^2*(D4/2) + 64*B4^2*A4^2*(C4/2)*(D4/2) + 8*A4^2*(C4/2)^2*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 8*A4^2*(D4/2)^2*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 8*(C4/2)^2*(D4/2)^2*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 64*A4*(C4/2)*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 32*A4*(D4/2)*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 16*A4*(C4/2)*(D4/2)^2*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 16*A4*(C4/2)^2*(D4/2)*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 32*A4^2*(C4/2)*(D4/2)*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2))/(8*(B4^2 - A4^2)^2 - 8*(B4^2 - A4^2)^(3/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) - 4*A4*(C4/2)^3 - 8*(C4/2)^2*(B4^2 - A4^2) + (C4/2)^4 + 4*A4^2*(C4/2)^2 + 4*(C4/2)^2*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2) + 16*A4*(C4/2)*(B4^2 - A4^2) - 8*A4*(C4/2)*(B4^2 - A4^2)^(1/2)*(B4^2 - A4^2 + 2*A4*(C4/2) - (C4/2)^2)^(1/2)))^(1/2)/2;
+        // Get user variables
+        float la = -1.0f;
+        float lb = -1.0f;
+        float lc = -1.0f;
+        float lx = -1.0f;
+        try {
+            la = Float.parseFloat(this.text_cal_radiusA.getText().trim());
+            lb = Float.parseFloat(this.text_cal_radiusB.getText().trim());
+            lc = Float.parseFloat(this.text_cal_radiusC.getText().trim());
+            lx = Float.parseFloat(this.text_cal_radius.getText().trim());
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "ERROR with Raidal inputs they must be number...  Are you trying to mess up your printer?");
+            return;
+        }
+        if((la < 0.0) || (lb < 0.0) || (lc < 0.0) || (lx < 0.0)){
+            JOptionPane.showMessageDialog(this, "Values must be posative...  Are you trying to mess up your printer?");
+            return;
+        }
+        float ls[] = {la, lb, lc};
+        float rods[] = this.getSelectedComPort().getFirmwareParser().getEepromState().getDiagonalRodLenghts();
+        float rodsP[] = new float[3];
+        // have everything I need.
+        for(int i=0; i<3; i++){
+            rodsP[i] = (float)(rods[i]*Math.sqrt(ls[i]/lx));
+        }
+        this.text_cal_calcA.setText(""+rodsP[0]);
+        this.text_cal_calcB.setText(""+rodsP[1]);
+        this.text_cal_calcC.setText(""+rodsP[2]);
 
     }//GEN-LAST:event_button_cal_RodsActionPerformed
 
-    private void button_cal_updateRods1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cal_updateRods1ActionPerformed
+    private void button_cal_updateTowerAngleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cal_updateTowerAngleActionPerformed
         // TODO add your handling code here:
         float angleA = Float.NaN;
         float angleB = Float.NaN;
@@ -1940,7 +1967,7 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
             new Thread(sci).start();
             
         }
-    }//GEN-LAST:event_button_cal_updateRods1ActionPerformed
+    }//GEN-LAST:event_button_cal_updateTowerAngleActionPerformed
 
     private void button_setCurZto1ExtraMMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_setCurZto1ExtraMMActionPerformed
         // TODO add your handling code here:
@@ -1970,6 +1997,24 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         new Thread(sci).start();
        
     }//GEN-LAST:event_button_setCurZto1ExtraMMActionPerformed
+
+    private void button_cal_updateRodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_cal_updateRodsActionPerformed
+        // TODO add your handling code here:
+        float rodsP[] = new float[3];
+        try{
+            rodsP[0] = Float.parseFloat(this.text_cal_calcA.getText());
+            rodsP[1] = Float.parseFloat(this.text_cal_calcB.getText());
+            rodsP[2] = Float.parseFloat(this.text_cal_calcC.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "ERROR with Raidal inputs Did you press calculate first and check the values?");
+            return;            
+        }
+        ArrayList<String> commands = new ArrayList<String>();
+        commands.addAll(this.getSelectedComPort().getFirmwareParser().getEepromState().getDiagonalRodLenghtsEepromCommands(rodsP));
+        commands.add(getEepromState().getEepromCommand());
+        SingleCommandControl sci = new SingleCommandControl(this.getSelectedComPort(), commands);
+        new Thread(sci).start();        
+    }//GEN-LAST:event_button_cal_updateRodsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2023,8 +2068,8 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
     private javax.swing.JButton button_cal_Rods;
     private javax.swing.JButton button_cal_step;
     private javax.swing.JButton button_cal_updateRods;
-    private javax.swing.JButton button_cal_updateRods1;
     private javax.swing.JButton button_cal_updateSteps;
+    private javax.swing.JButton button_cal_updateTowerAngle;
     private javax.swing.JButton button_command;
     private javax.swing.JButton button_eeprom;
     private javax.swing.JButton button_homeAll;
