@@ -1934,10 +1934,11 @@ public final class EasyDeltaPie extends javax.swing.JFrame {
         }
         float ls[] = {la, lb, lc};
         float rods[] = this.getSelectedComPort().getFirmwareParser().getEepromState().getDiagonalRodLenghts();
+        float radius = this.getSelectedComPort().getFirmwareParser().getEepromState().getHorizontalRodRadius().getValueAsFloat();
         float rodsP[] = new float[3];
         // have everything I need.
         for(int i=0; i<3; i++){
-            rodsP[i] = (float)(rods[i]*Math.sqrt(ls[i]/lx));
+            rodsP[i] = (float)(RodLengthCalc.getNewRodLenght(ls[i],rods[i],radius,lx));
         }
         this.text_cal_calcA.setText(""+rodsP[0]);
         this.text_cal_calcB.setText(""+rodsP[1]);
