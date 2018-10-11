@@ -90,12 +90,13 @@ public class Repetier implements Firmware{
     @Override
     public boolean addControl(DeltaComControl comControl) {
         boolean canAdd = true;
+        // check if we can add command or if its blocked
         for(DeltaComControl dci : interfaces){
-            canAdd = canAdd & dci.allowOthers();
+            canAdd = canAdd && dci.allowOthers();
         }
         if(canAdd || comControl.allowOthers()){
             interfaces.add(comControl);
-            canAdd = canAdd & comControl.allowOthers();
+            canAdd = canAdd && comControl.allowOthers();
         }
         return canAdd;
     }

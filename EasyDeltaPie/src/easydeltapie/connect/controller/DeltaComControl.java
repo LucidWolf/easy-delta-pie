@@ -30,6 +30,7 @@ public abstract class DeltaComControl implements Runnable{
     protected final DeltaComPort com;
     protected boolean initalized = false;
     private boolean running = false;
+    private boolean resting = false;
     protected DeltaComControl(DeltaComPort com){
         this.com = com;
         register();
@@ -50,9 +51,12 @@ public abstract class DeltaComControl implements Runnable{
         com.addCommand(new DeltaCommand(this, command));
     }
     protected synchronized void addCommandAndWait(String command){
+        addCommandAndWait(command, false);
+    }
+    protected synchronized void addCommandAndWait(String command, boolean toRest){
         addCommand(command);
         running = true;
-        while(running){
+        while(running || (toRest && !resting)){
             try {
                 wait();
             } catch (InterruptedException ex) {
@@ -73,6 +77,10 @@ public abstract class DeltaComControl implements Runnable{
 
     public synchronized void fireCommandComplete(){
         running = false;
+        notifyAll();
+    }
+    public synchronized void fireIdleComplete() {
+        resting = true;
         notifyAll();
     }
     

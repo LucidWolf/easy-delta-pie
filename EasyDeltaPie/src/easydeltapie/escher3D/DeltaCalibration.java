@@ -77,7 +77,7 @@ public class DeltaCalibration {
 		probeMotorPositions.data[i][1] = deltaParams.transform(machinePos, 1);
 		probeMotorPositions.data[i][2] = deltaParams.transform(machinePos, 2);
 
-		initialRmsError += fsquare(points.get(i).zDRev());
+		initialRmsError += fsquare(points.get(i).z());
 	}
 
 	//<>< DebugPrint(probeMotorPositions.Print("Motor positions:"));
@@ -106,9 +106,9 @@ public class DeltaCalibration {
 				}
 				normalMatrix.data[i][j] = temp;
 			}
-			double temp = derivativeMatrix.data[0][i] * -(points.get(0).zDRev() + corrections[0]);
+			double temp = derivativeMatrix.data[0][i] * -(points.get(0).z() + corrections[0]);
 			for (int k = 1; k < numPoints; k++) {
-				temp += derivativeMatrix.data[k][i] * -(points.get(k).zDRev() + corrections[k]);
+				temp += derivativeMatrix.data[k][i] * -(points.get(k).z() + corrections[k]);
 			}
 			normalMatrix.data[i][numFactors] = temp;
 		}
@@ -131,7 +131,7 @@ public class DeltaCalibration {
 			// Calculate and display the residuals
 			double residuals[] = new double[numPoints];
 			for (int i = 0; i < numPoints; i++) {
-				double r = points.get(i).zDRev();
+				double r = points.get(i).z();
 				for (int j = 0; j < numFactors; j++) {
 					r += solution[j] * derivativeMatrix.data[i][j];
 				}
@@ -152,7 +152,7 @@ public class DeltaCalibration {
 				}
 				double newZ = deltaParams.InverseTransform(probeMotorPositions.data[i][0], probeMotorPositions.data[i][1], probeMotorPositions.data[i][2]);
 				corrections[i] = newZ;
-				expectedResiduals[i] = points.get(i).zDRev() + newZ;
+				expectedResiduals[i] = points.get(i).z() + newZ;
 				sumOfSquares += fsquare(expectedResiduals[i]);
 			}
 

@@ -26,17 +26,17 @@ import java.util.List;
 public class BedProbePoint {
     private final float x;
     private final float y;
-    private final float probeHeight;
-    private double z = 0.0;
+    private final Float probeStartHeight;
+    private float z = 0.0f;
 
     private final ArrayList<Float> zRaw = new ArrayList<Float>();
     private int intialSize;
     private int finalSize;
     private double cov;
-    public BedProbePoint(float x, float y, float probeHeight){
+    public BedProbePoint(float x, float y, Float probeStartHeight){
         this.x = x;
         this.y = y;
-        this.probeHeight = probeHeight;
+        this.probeStartHeight = probeStartHeight;
     }
     public void setZ(float z){
         this.z = z;
@@ -49,12 +49,11 @@ public class BedProbePoint {
         return y;
     }
 
-    public double z() {
-        return probeHeight - z;
-    }
-    // the Escher3D expects a flip sign to what he had on his webpage found it in java script...
-    public double zDRev() {
-        return probeHeight - z;
+    public float z() {
+        if(probeStartHeight == null){
+            return z;
+        }
+        return probeStartHeight - z;
     }
 
     public void addRawProbeZ(float z) {
@@ -63,8 +62,8 @@ public class BedProbePoint {
 
     public void runStatisticalAnalysis(double maxCoefVariation) {
         this.intialSize = zRaw.size();
-        double mean = getMean(zRaw);
-        double sd = getStandardDeviation(zRaw, mean);
+        float mean = getMean(zRaw);
+        float sd = getStandardDeviation(zRaw, mean);
         while(maxCoefVariation < sd/mean*100){
             // remove a point and try again
             double maxDist = 0.0;
@@ -86,19 +85,19 @@ public class BedProbePoint {
         cov = sd/mean*100;
     }
 
-    private static double getMean(List<Float> data) {
-        double out = 0.0;
+    private static float getMean(List<Float> data) {
+        float out = 0.0f;
         for(float f : data){
             out = out+f;
         }
         return out/data.size();   
     }
-   private static double getStandardDeviation(List<Float> data, double mean) {
-        double out = 0.0;
+   private static float getStandardDeviation(List<Float> data, float mean) {
+        float out = 0.0f;
         for(float f : data){
             out = out + (f-mean)*(f-mean);
         }
-        out = Math.sqrt(out/data.size());
+        out = (float)Math.sqrt(out/data.size());
         return out;   
    }
 

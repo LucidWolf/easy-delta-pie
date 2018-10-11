@@ -49,6 +49,7 @@ public class SingleCommandControl extends DeltaComControl{
         for(String command:commands){
             this.addCommandAndWait(command);
         }
+        this.addCommandAndWait("M114", true);
         this.selfdestruct();
     }
 

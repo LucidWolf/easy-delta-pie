@@ -19,6 +19,9 @@ package easydeltapie.connect.machine;
 import easydeltapie.connect.machine.states.CommandState;
 import easydeltapie.connect.machine.states.IdleState;
 import easydeltapie.connect.machine.states.UnknownState;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -44,5 +47,6 @@ public interface MachineState {
     public String getRepetierKey();
     public void parseRepetier(String lineIn);
     public void parseMarlin(String lineIn);
-    
+    public void printOut(PrintWriter pw);
+    public ArrayList<String> readIn(BufferedReader br);
 }

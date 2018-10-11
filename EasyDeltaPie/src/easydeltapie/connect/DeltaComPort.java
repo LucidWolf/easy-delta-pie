@@ -31,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,6 +50,7 @@ public class DeltaComPort implements Runnable, SerialPortEventListener{
     private BufferedReader input;
     
     private final ArrayDeque<DeltaCommand> commands = new ArrayDeque<>();
+    private final ArrayList<DeltaCommand> commandsPriorToIdle = new ArrayList<>();
     
     private Firmware firmware;
     
@@ -159,14 +161,21 @@ public class DeltaComPort implements Runnable, SerialPortEventListener{
                         if(state.getStateType() == MachineState.DATA_COMMAND){
                             if(!commands.isEmpty() && commands.getFirst().isRunning()){
                                 // dont know why i am so check heavy
-                                commands.pollFirst().getControl().fireCommandComplete();
+                                DeltaCommand dc = commands.pollFirst();
+                                dc.getControl().fireCommandComplete();
+                                commandsPriorToIdle.add(dc);
                             }else{
                                 // do nothing rewake the com sending thread
                                 // send a desync warning? (Nah?)
                                 wake();
                             }
-                        }else if(state.getStateType() == MachineState.DATA_IDLE && !commands.isEmpty()){
-                            wake();
+                        }else if(state.getStateType() == MachineState.DATA_IDLE){
+                            for(DeltaCommand dc : commandsPriorToIdle){
+                                dc.getControl().fireIdleComplete();
+                            }
+                            if(!commands.isEmpty()){                                
+                                wake();
+                            }
                         }
 
                 } catch (Exception e) {

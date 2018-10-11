@@ -37,6 +37,8 @@ import javax.swing.JOptionPane;
  * @author LucidWolf <https://github.com/LucidWolf>
  */
 public class AutoLevelControl extends DeltaComControl{
+    private final float[] testAngles = {-150f, -90f, -30f, 30f, 90f, 150f, -150f, -90f, -30f, 30f, 90f, 150f, 0f};
+    private final float[] testPercent = {1f, 1f, 1f, 1f, 1f, 1f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.0f};
     private final EasyDeltaPie dal;
     private final ArrayList<BedProbePoint> points = new ArrayList<BedProbePoint>();
     private final int perRadius;
@@ -78,16 +80,15 @@ public class AutoLevelControl extends DeltaComControl{
     @Override
     public void run() {
         // build the points
-        double testRadius = es.getMaxBuildDiameter().getValueAsFloat()*perRadius/100.0;
-        float probeZHeight = (float)es.getProbeZHeight().getValueAsFloat();
+        double testRadius = es.getMaxBuildRadius().getValueAsFloat()*perRadius/100.0;
+        float probeZStartHeight = (float)es.getProbeZStartHeight().getValueAsFloat();
         dal.updateAutoLevelStatus(0,"Probe radius = "+(testRadius));
-        dal.updateAutoLevelStatus(0,"Probe goal = "+(probeZHeight));
-        for(int i = 0; i < 8; i++){
-            float x = (float)(testRadius*Math.cos(i*Math.PI/4.0));
-            float y = (float)(testRadius*Math.sin(i*Math.PI/4.0));            
-            points.add(new BedProbePoint(x, y, probeZHeight));
+        dal.updateAutoLevelStatus(0,"Probe goal = "+(probeZStartHeight));
+        for(int i = 0; i < testAngles.length; i++){
+            float x = (float)(testRadius*testPercent[i]*Math.cos(testAngles[i]*Math.PI/180.0));
+            float y = (float)(testRadius*testPercent[i]*Math.sin(testAngles[i]*Math.PI/180.0));
+            points.add(new BedProbePoint(x, y, probeZStartHeight));
         }
-            points.add(new BedProbePoint(0.0f, 0.0f, probeZHeight));
         // home the machine first
         this.addCommandAndWait("G90");
         this.addCommandAndWait("G28");
@@ -117,15 +118,15 @@ public class AutoLevelControl extends DeltaComControl{
             calibrate.doDeltaCalibration(4);
             dal.updateAutoLevelStatus(100,"Calibration Complete:");
             dal.updateAutoLevelStatus(100,"Description\tOld Value\t New Value");
-            dal.updateAutoLevelStatus(100,"Error\t"+calibrate.getInitialError()+"\t"+calibrate.getFinalError());
+            dal.updateAutoLevelStatus(100,"Error\t"+f(calibrate.getInitialError())+"\t"+f(calibrate.getFinalError()));
             finalParam = calibrate.getParameters();
             double[] endsN = finalParam.getStopAdjusts();
             double[] endsO = startParam.getStopAdjusts();
-            dal.updateAutoLevelStatus(100,"Rad @ 0.0\t"+startParam.getHorizontalRodRadius()+"\t"+finalParam.getHorizontalRodRadius());
-            dal.updateAutoLevelStatus(100,"Height\t"+startParam.getHomedHeight()+"\t"+finalParam.getHomedHeight());
-            dal.updateAutoLevelStatus(100,"Aadjust\t"+endsO[0]+"\t"+endsN[0]);
-            dal.updateAutoLevelStatus(100,"Badjust\t"+endsO[1]+"\t"+endsN[1]);
-            dal.updateAutoLevelStatus(100,"Cadjust\t"+endsO[2]+"\t"+endsN[2]);
+            dal.updateAutoLevelStatus(100,"Rad @ 0.0\t"+f(startParam.getHorizontalRodRadius())+"\t"+f(finalParam.getHorizontalRodRadius()));
+            dal.updateAutoLevelStatus(100,"Height\t"+f(startParam.getHomedHeight())+"\t"+f(finalParam.getHomedHeight()));
+            dal.updateAutoLevelStatus(100,"Aadjust\t"+f(endsO[0])+"\t"+f(endsN[0]));
+            dal.updateAutoLevelStatus(100,"Badjust\t"+f(endsO[1])+"\t"+f(endsN[1]));
+            dal.updateAutoLevelStatus(100,"Cadjust\t"+f(endsO[2])+"\t"+f(endsN[2]));
             int opt = JOptionPane.showConfirmDialog(dal,dal.getStatusString(), "Update Firmware?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(opt == JOptionPane.YES_OPTION){
                 ArrayList<String> commands = finalParam.setCommandsForEscher3D(es);
@@ -153,5 +154,9 @@ public class AutoLevelControl extends DeltaComControl{
     @Override
     protected void destroy() {
         
+    }
+
+    private String f(double d) {
+        return String.format("%1$.3f", d);
     }
 }

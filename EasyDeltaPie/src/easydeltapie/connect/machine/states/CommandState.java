@@ -18,6 +18,9 @@
 package easydeltapie.connect.machine.states;
 
 import easydeltapie.connect.machine.MachineState;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,6 +45,16 @@ public class CommandState implements MachineState{
     @Override
     public void parseMarlin(String lineIn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void printOut(PrintWriter pw) {
+        
+    }
+
+    @Override
+    public ArrayList<String> readIn(BufferedReader br) {
+        return null;
     }
 
 }

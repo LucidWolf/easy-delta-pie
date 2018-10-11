@@ -21,11 +21,16 @@ import easydeltapie.connect.machine.Firmware;
 import easydeltapie.connect.machine.MachineState;
 import easydeltapie.escher3D.CalibrationException;
 import easydeltapie.escher3D.DeltaParameters;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
 
@@ -38,7 +43,7 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
     private final ArrayList<EepromValue> modelList = new ArrayList<EepromValue>();
     private String command;
     private EepromValue stepsPerMM = null;
-    private EepromValue maxBuildDiameter = null;
+    private EepromValue maxBuildRadius = null;
     private EepromValue diagonalRodLength = null;
     private EepromValue diagonalRodAdjustA = null;
     private EepromValue diagonalRodAdjustB = null;
@@ -51,6 +56,7 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
     private EepromValue aAngle = null;
     private EepromValue bAngle = null;
     private EepromValue cAngle = null;
+    private EepromValue probeZStartHeight = null;
     private EepromValue probeZHeight = null;
     private final int firmware;
     private EepromValue lastSelected = null;
@@ -105,7 +111,7 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
                 this.fireContentsChanged(this, index, index);
             }
             if(desc.equalsIgnoreCase("Max printable radius [mm]")){
-                maxBuildDiameter = aVal;
+                maxBuildRadius = aVal;
             }else if(desc.equalsIgnoreCase("Steps per mm")){
                 this.stepsPerMM = aVal;
             }else if(desc.equalsIgnoreCase("Diagonal rod length [mm]")){
@@ -127,6 +133,8 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
             }else if(desc.equalsIgnoreCase("Alpha C(90):")){
                 this.cAngle = aVal;
             }else if(desc.equalsIgnoreCase("Max. z-probe - bed dist. [mm]")){
+                this.probeZStartHeight = aVal;
+            }else if(desc.equalsIgnoreCase("Z-probe height [mm]")){
                 this.probeZHeight = aVal;
             }else if(desc.equalsIgnoreCase("Corr. diagonal A [mm]")){
                 this.diagonalRodAdjustA = aVal;
@@ -139,6 +147,65 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
             
         }
     }
+    
+    @Override
+    public void printOut(PrintWriter pw) {
+        for(EepromValue ev: modelList){
+            //type, position, value, desc
+            pw.println(ev.getType()+"\t"+ev.getPosition()+"\t"+ev.getValue()+"\t"+ev.toString());
+        }
+    }
+
+    @Override
+    public ArrayList<String> readIn(BufferedReader br) {
+        ArrayList<String> commands = new ArrayList<>();
+        ArrayList<EepromValue> values = new ArrayList<>();
+        boolean error = false;
+        try {
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
+                StringTokenizer tok = new StringTokenizer(line,"\t");
+                try{
+                    int type = Integer.parseInt(tok.nextToken());
+                    int position = Integer.parseInt(tok.nextToken());
+                    String value = tok.nextToken();
+                    String desc = tok.nextToken();
+                    values.add(new EepromValue(type, position, value, desc));
+                }catch(Exception e){
+                   error = true;
+                }
+            }        
+        } catch (IOException ex) {
+            error = true;
+        }
+        if(!error){
+            
+            for(EepromValue ev : values){
+                // check if ev matches
+                EepromValue cur = this.eeprom.get(ev.getPosition());
+                if(cur == null){
+                    // <>< Say why we stoped?
+                    error = true;
+                    break;
+                }else{
+                    // only add it to the commands if it changes the values
+                    if(cur.getValue().compareToIgnoreCase(ev.getValue())!=0){
+                        commands.add(this.getEepromWriteCommand(ev, ev.getValue()));
+                    }
+                }
+            }
+            if(error){
+                commands.clear();
+            }else{
+                commands.add(this.getEepromCommand());
+            }
+        }else{
+            // tell the user?
+        }
+        return commands;
+    }
+    public EepromValue getProbeZStartHeight() {
+        return probeZStartHeight;
+    }    
     public EepromValue getProbeZHeight() {
         return probeZHeight;
     }
@@ -178,11 +245,14 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
         return out;
     }
     // output in distance mm not steps
-    public float[] getTowerStopAdjusts() throws Exception{
+    public float[] getTowerStopAdjusts(){
         float out[] = new float[3];
         out[0] = this.aStopAdjust.getValueAsFloat();
         out[1] = this.bStopAdjust.getValueAsFloat();
         out[2] = this.cStopAdjust.getValueAsFloat();
+        if(Float.isNaN(out[0]) || Float.isNaN(out[1]) || Float.isNaN(out[2])){
+            return null;
+        }
         if(firmware == Firmware.REPETIER){
             float stepsMM = this.stepsPerMM.getValueAsFloat();
             out[0] = out[0]/stepsMM;
@@ -237,8 +307,8 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
         return horizontalRodRadius;
     }
 
-    public EepromValue getMaxBuildDiameter() {
-        return maxBuildDiameter;
+    public EepromValue getMaxBuildRadius() {
+        return maxBuildRadius;
     }
     public EepromValue getHomedHeight() {
         return homedHeight;
@@ -311,6 +381,7 @@ public class EepromState extends AbstractListModel implements MachineState, Comb
     public Object getSelectedItem() {
         return lastSelected;
     }
+
 
 
 

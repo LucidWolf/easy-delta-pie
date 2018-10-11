@@ -19,6 +19,9 @@ package easydeltapie.connect.machine.states;
 
 import easydeltapie.connect.machine.MachineState;
 import static easydeltapie.connect.machine.Repetier.parseRepiterLineDetailed;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -60,5 +63,15 @@ public class SingleZProbeState implements MachineState{
     }
     public float z(){
         return z;
+    }
+
+    @Override
+    public void printOut(PrintWriter pw) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<String> readIn(BufferedReader br) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

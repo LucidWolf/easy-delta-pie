@@ -72,7 +72,7 @@ public class EepromValue implements Comparable{
     }
 
     public float getValueAsFloat() {
-        float out = 0.0f;
+        float out = Float.NaN;
         try{out = Float.parseFloat(value);}catch(Exception e){}
         return out;
     }
