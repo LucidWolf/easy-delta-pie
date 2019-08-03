@@ -19,7 +19,6 @@ package easydeltapie.connect.controller;
 
 import easydeltapie.EasyDeltaPie;
 import easydeltapie.connect.DeltaComPort;
-import easydeltapie.connect.machine.Firmware;
 import easydeltapie.connect.machine.MachineState;
 import easydeltapie.connect.machine.states.EepromState;
 import easydeltapie.connect.machine.states.SingleZProbeState;
@@ -47,7 +46,6 @@ public class AutoLevelControl extends DeltaComControl{
     private int probecount = 0;
     private int lastPoint = -1;
 
-    private final float initalZ = 10.0f;
     private final double maxCoefVariation;
     private final EepromState es;
     public AutoLevelControl(DeltaComPort com, EasyDeltaPie dal, int perRadius, int retry, double maxCoefVariation){
@@ -92,9 +90,9 @@ public class AutoLevelControl extends DeltaComControl{
         // home the machine first
         this.addCommandAndWait("G90");
         this.addCommandAndWait("G28");
-        this.addCommandAndWait("G1 X0.0 Y0.0 Z"+initalZ);
+        this.addCommandAndWait("G1 X0.0 Y0.0 Z"+probeZStartHeight);
         for(BedProbePoint bp : points){
-            this.addCommandAndWait("G1 X"+bp.x()+" Y"+bp.y()+" Z"+initalZ);
+            this.addCommandAndWait("G1 X"+bp.x()+" Y"+bp.y()+" Z"+probeZStartHeight);
             for(int i = 0; i < retry; i++){
                 this.addCommandAndWait("G30");
             }
